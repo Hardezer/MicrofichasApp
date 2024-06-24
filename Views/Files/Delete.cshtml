@@ -1,0 +1,27 @@
+﻿@model Microfichas_App.Models.File
+
+@{
+    ViewData["Title"] = "Eliminar Archivo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>¿Está seguro que desea eliminar este archivo?</h3>
+<div>
+    <h4>@Model.FileName</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Model.FileName
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="FileId" />
+        <input type="hidden" asp-for="FolderId" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index" asp-route-parentFolderId="@Model.FolderId" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

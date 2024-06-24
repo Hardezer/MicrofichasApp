@@ -1,0 +1,21 @@
+﻿@model Microfichas_App.Models.Folder
+
+@{
+    ViewData["Title"] = "Crear Carpeta";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label asp-for="FolderName" class="control-label"></label>
+        <input asp-for="FolderName" class="form-control" />
+        <span asp-validation-for="FolderName" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="ParentFolderId" />
+    <div class="form-group">
+        <input type="submit" value="Crear" class="btn btn-primary" />
+        <a asp-action="Index" asp-route-parentFolderId="@Model.ParentFolderId" class="btn btn-secondary">Volver a la lista</a>
+    </div>
+</form>

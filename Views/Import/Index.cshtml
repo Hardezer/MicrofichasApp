@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Import Folders";
+}
+
+<h2>Import Folders</h2>
+
+<form asp-action="Import" method="post">
+    <div class="form-group">
+        <label for="rootPath">Root Path</label>
+        <input type="text" class="form-control" id="rootPath" name="rootPath" placeholder="Enter the root path">
+    </div>
+    <button type="submit" class="btn btn-primary">Import</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}

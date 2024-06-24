@@ -1,0 +1,141 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #f4f6f9;
+}
+
+.navbar-brand, .nav-link {
+    color: #007bff !important;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+}
+
+.main-content {
+    padding: 2rem 0;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.breadcrumb {
+    background-color: #f8f9fa;
+}
+
+/* Additional styles for better appearance */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.footer {
+    border-top: 1px solid #eaeaea;
+    text-align: center;
+}
+
+    .footer a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Custom styles for table */
+.table {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+}
+
+    .table thead {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .table tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+        .table tbody tr:hover {
+            background-color: #f1f3f5;
+        }
+
+    .table tbody td {
+        vertical-align: middle;
+    }
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}
+
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+/* Custom icon styles */
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
