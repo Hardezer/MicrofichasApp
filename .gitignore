@@ -1,0 +1,51 @@
+# Ignore Visual Studio temporary files, build results, and
+# folder config file
+*.tmp
+*.temp
+*.obj
+*.bin
+*.log
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sdf
+*.cache
+*.pdb
+*.ilk
+*.ndk
+*.psess
+*.tlog
+*.vspx
+*.csproj.user
+*.dbmdl
+*.log
+*.vspscc
+.history/
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+.vs/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.Generated.cs
+
+# Ignore folders
+bin/
+obj/
+.vs/
+
+# Ignore application secrets
+secrets.json
+
+# Ignore app settings
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
