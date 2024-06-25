@@ -74,6 +74,7 @@ namespace Microfichas_App.Controllers
             }
 
 
+
             public IActionResult Create(int? parentFolderId)
             {
                 var folder = new Folder
@@ -268,6 +269,25 @@ namespace Microfichas_App.Controllers
             {
                 return _context.Folders.Any(e => e.FolderId == id);
             }
+
+            public IActionResult Search(string searchQuery)
+            {
+                var folders = _context.Folders
+                    .Where(f => f.FolderName.Contains(searchQuery))
+                    .ToList();
+                var files = _context.Files
+                    .Where(f => f.FileName.Contains(searchQuery))
+                    .ToList();
+
+                var viewModel = new FolderFilesViewModel
+                {
+                    Folders = folders,
+                    Files = files
+                };
+
+                return PartialView("_SearchResults", viewModel);
+            }
+
 
         }
     }

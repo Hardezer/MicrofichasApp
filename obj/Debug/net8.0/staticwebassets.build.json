@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "W2Gj/5DJ/GcgnyXa80sEbpjz3kD06Mps0J+pORLZNsc=",
+  "Hash": "FOsNRXFImMt0lHQyNNMcz1hN5Dmfcpj+CjWUoxsqLJw=",
   "Source": "Microfichas App",
   "BasePath": "_content/Microfichas App",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\png-icon.png"
+    },
+    {
+      "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\folderScripts.js",
+      "SourceId": "Microfichas App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\",
+      "BasePath": "_content/Microfichas App",
+      "RelativePath": "js/folderScripts.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\folderScripts.js"
     },
     {
       "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\site.js",

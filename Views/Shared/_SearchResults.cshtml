@@ -1,0 +1,36 @@
+﻿@model Microfichas_App.Models.FolderFilesViewModel
+
+@foreach (var folder in Model.Folders)
+{
+    <tr>
+        <td>
+            <a asp-action="Index" asp-route-parentFolderId="@folder.FolderId">
+                <img src="~/images/folder-icon.png" alt="Folder Icon" class="icon" />
+                @folder.FolderName
+            </a>
+        </td>
+        <td>@folder.ModifiedBy</td>
+        <td>@(folder.ModifiedDate.HasValue ? folder.ModifiedDate.Value.ToString("dd/MM/yyyy HH:mm") : "")</td>
+        <td>
+            <button class="btn btn-sm btn-outline-primary shadow-sm" data-toggle="modal" data-target="#editFolderModal" data-folder-id="@folder.FolderId" data-folder-name="@folder.FolderName">Editar</button>
+            <button class="btn btn-sm btn-outline-danger shadow-sm" data-toggle="modal" data-target="#deleteFolderModal" data-folder-id="@folder.FolderId" data-folder-name="@folder.FolderName">Eliminar</button>
+        </td>
+    </tr>
+}
+@foreach (var file in Model.Files)
+{
+    <tr>
+        <td>
+            <a href="@Url.Action("GetFile", new { filePath = file.Server + file.ContainerPath + file.FullFileName })" target="_blank">
+                <img src="~/images/@(file.FileType.ToLower().TrimStart('.'))-icon.png" alt="@file.FileType Icon" class="icon" />
+                @file.FileName
+            </a>
+        </td>
+        <td>@file.ModifiedBy</td>
+        <td>@(file.ModifiedDate.HasValue ? file.ModifiedDate.Value.ToString("dd/MM/yyyy HH:mm") : "")</td>
+        <td>
+            <button class="btn btn-sm btn-outline-primary shadow-sm" data-toggle="modal" data-target="#editFileModal" data-file-id="@file.FileId" data-file-name="@file.FileName">Editar</button>
+            <button class="btn btn-sm btn-outline-danger shadow-sm" data-toggle="modal" data-target="#deleteFileModal" data-file-id="@file.FileId" data-file-name="@file.FileName">Eliminar</button>
+        </td>
+    </tr>
+}

@@ -135,3 +135,4 @@ C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\ru\
 C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\obj\Debug\net8.0\Microfichas App.sourcelink.json

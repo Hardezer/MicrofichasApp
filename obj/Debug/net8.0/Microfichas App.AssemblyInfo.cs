@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Microfichas App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+654b129dd39b1dd4aa6e9e035cc4da7d78151293")]
 [assembly: System.Reflection.AssemblyProductAttribute("Microfichas App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microfichas App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

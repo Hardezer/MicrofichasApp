@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\images\\png-icon.png"
     },
     {
+      "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\folderScripts.js",
+      "PackagePath": "staticwebassets\\js\\folderScripts.js"
+    },
+    {
       "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

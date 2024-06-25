@@ -1,0 +1,94 @@
+﻿@* Views/Shared/_Modals.cshtml *@
+@* Modal Editar Carpeta *@
+<div class="modal fade" id="editFolderModal" tabindex="-1" role="dialog" aria-labelledby="editFolderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content shadow-sm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editFolderModalLabel">Editar Carpeta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editFolderForm">
+                    <input type="hidden" id="editFolderId" />
+                    <div class="form-group">
+                        <label for="editFolderName" class="control-label">Nombre</label>
+                        <input type="text" id="editFolderName" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal Eliminar Carpeta *@
+<div class="modal fade" id="deleteFolderModal" tabindex="-1" role="dialog" aria-labelledby="deleteFolderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content shadow-sm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteFolderModalLabel">Eliminar Carpeta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar esta carpeta?</p>
+                <input type="hidden" id="deleteFolderId" />
+                <p id="deleteFolderName" class="font-weight-bold"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteFolder">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal Editar Archivo *@
+<div class="modal fade" id="editFileModal" tabindex="-1" role="dialog" aria-labelledby="editFileModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content shadow-sm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editFileModalLabel">Editar Archivo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editFileForm">
+                    <input type="hidden" id="editFileId" />
+                    <div class="form-group">
+                        <label for="editFileName" class="control-label">Nombre</label>
+                        <input type="text" id="editFileName" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal Eliminar Archivo *@
+<div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="deleteFileModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content shadow-sm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteFileModalLabel">Eliminar Archivo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar este archivo?</p>
+                <input type="hidden" id="deleteFileId" />
+                <p id="deleteFileName" class="font-weight-bold"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteFile">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
