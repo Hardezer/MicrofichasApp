@@ -1,5 +1,25 @@
-﻿// wwwroot/js/folderScripts.js
-$(document).ready(function () {
+﻿$(document).ready(function () {
+    // Manejar formulario de creación de carpeta
+    $('#createFolderForm').on('submit', function (e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        console.log("Datos del formulario:", formData);
+
+        $.post('/Folders/Create', formData, function (response) {
+            console.log("Respuesta recibida:", response);
+            if (response.success) {
+                $('#createFolderModal').modal('hide');
+                window.location.reload();
+            } else {
+                alert(response.message);
+            }
+        }).fail(function (error) {
+            console.error('Error al crear la carpeta:', error);
+            alert('No se pudo crear la carpeta. Por favor, intenta nuevamente.');
+        });
+    });
+
+
     // Manejar evento cuando se muestra el modal de editar carpeta
     $('#editFolderModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -11,13 +31,14 @@ $(document).ready(function () {
         modal.find('#editFolderName').val(folderName);
     });
 
-    // Manejar evento cuando se envía el formulario de editar carpeta
+    // Manejar formulario de edición de carpeta
     $('#editFolderForm').submit(function (event) {
         event.preventDefault();
 
         var folder = {
             FolderId: $('#editFolderId').val(),
-            FolderName: $('#editFolderName').val()
+            FolderName: $('#editFolderName').val(),
+            ModifiedDate: new Date().toISOString()
         };
 
         $.ajax({
@@ -70,89 +91,54 @@ $(document).ready(function () {
         });
     });
 
-    // Manejar evento cuando se muestra el modal de editar archivo
-    $('#editFileModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var fileId = button.data('file-id');
-        var fileName = button.data('file-name');
+    
+    let nameSortOrder = 'asc';
+    let dateSortOrder = 'asc';
 
-        var modal = $(this);
-        modal.find('#editFileId').val(fileId);
-        modal.find('#editFileName').val(fileName);
+    //sort por nombre
+    document.getElementById('name-sort-icon').addEventListener('click', function () {
+        sortTable('tableBody', 0, nameSortOrder, 'string');
+        nameSortOrder = (nameSortOrder === 'asc') ? 'desc' : 'asc';
+        updateSortIcon('name-sort-icon', nameSortOrder);
+    });
+    //sort por nombre
+    document.getElementById('date-sort-icon').addEventListener('click', function () {
+        sortTable('tableBody', 2, dateSortOrder, 'date');
+        dateSortOrder = (dateSortOrder === 'asc') ? 'desc' : 'asc';
+        updateSortIcon('date-sort-icon', dateSortOrder);
     });
 
-    // Manejar evento cuando se envía el formulario de editar archivo
-    $('#editFileForm').submit(function (event) {
-        event.preventDefault();
+    //cambia la tabla
+    function sortTable(tableId, column, order, type) {
+        let table = document.getElementById(tableId);
+        let rows = Array.from(table.rows);
+        rows.sort((a, b) => {
+            let aText = a.cells[column].innerText.trim();
+            let bText = b.cells[column].innerText.trim();
 
-        var file = {
-            FileId: $('#editFileId').val(),
-            FileName: $('#editFileName').val()
-        };
-
-        $.ajax({
-            url: '/Files/EditFile',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(file),
-            success: function (response) {
-                if (response.success) {
-                    location.reload();
-                } else {
-                    alert('Error: ' + response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                alert('Request failed: ' + error);
+            if (type === 'date') {
+                aText = aText ? new Date(aText.split('/').reverse().join('-')) : new Date(0);
+                bText = bText ? new Date(bText.split('/').reverse().join('-')) : new Date(0);
+                return (order === 'asc') ? aText - bText : bText - aText;
+            } else {
+                return (order === 'asc') ? aText.localeCompare(bText) : bText.localeCompare(aText);
             }
         });
-    });
+        rows.forEach(row => table.appendChild(row));
+    }
 
-    // Manejar evento cuando se muestra el modal de eliminar archivo
-    $('#deleteFileModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var fileId = button.data('file-id');
-        var fileName = button.data('file-name');
+    // cambia el icono de orden
+    function updateSortIcon(iconId, order) {
+        let icon = document.getElementById(iconId);
+        if (order === 'asc') {
+            icon.classList.add('arrow-up');
+            icon.classList.remove('arrow-down');
+        } else {
+            icon.classList.add('arrow-down');
+            icon.classList.remove('arrow-up');
+        }
+    }
 
-        var modal = $(this);
-        modal.find('#deleteFileId').val(fileId);
-        modal.find('#deleteFileName').text(fileName);
-    });
+  
 
-    // Manejar evento cuando se confirma la eliminación de archivo
-    $('#confirmDeleteFile').click(function () {
-        var fileId = $('#deleteFileId').val();
-
-        $.ajax({
-            url: '/Files/DeleteFile',
-            type: 'POST',
-            data: { id: fileId },
-            success: function (response) {
-                if (response.success) {
-                    location.reload();
-                } else {
-                    alert('Error: ' + response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                alert('Request failed: ' + error);
-            }
-        });
-    });
-
-    $('#searchBox').on('input', function () {
-        var query = $(this).val();
-        $.ajax({
-            url: '/Folders/Search',
-            type: 'GET',
-            data: { searchQuery: query },
-            success: function (data) {
-                // Actualizar la vista con los resultados obtenidos
-                $('tbody').html(data);
-            },
-            error: function (xhr, status, error) {
-                console.error('Error en la búsqueda: ' + error);
-            }
-        });
-    });
 });

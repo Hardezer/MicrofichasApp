@@ -1,0 +1,86 @@
+﻿@model Microfichas_App.Models.FolderFilesViewModel
+@{
+    var folderBreadcrumbs = ViewBag.FolderBreadcrumbs as Dictionary<int, List<Microfichas_App.Models.Breadcrumb>> ?? new Dictionary<int, List<Microfichas_App.Models.Breadcrumb>>();
+    var fileBreadcrumbs = ViewBag.FileBreadcrumbs as Dictionary<int, List<Microfichas_App.Models.Breadcrumb>> ?? new Dictionary<int, List<Microfichas_App.Models.Breadcrumb>>();
+}
+
+<table class="table table-striped table-hover shadow-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Modificado por</th>
+            <th>Fecha de modificación</th>
+            <th>Ruta de acceso</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        @foreach (var folder in Model.Folders)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Index" asp-route-parentFolderId="@folder.FolderId">
+                        <img src="~/images/folder-icon.png" alt="Folder Icon" class="icon" />
+                        @folder.FolderName
+                    </a>
+                </td>
+                <td>@folder.ModifiedBy</td>
+                <td>@(folder.ModifiedDate.HasValue ? folder.ModifiedDate.Value.ToString("dd/MM/yyyy HH:mm") : "")</td>
+                <td>
+                    @if (folderBreadcrumbs.ContainsKey(folder.FolderId))
+                    {
+                        @foreach (var breadcrumb in folderBreadcrumbs[folder.FolderId])
+                        {
+                            @if (breadcrumb.FolderId != 0)
+                            {
+                                <a asp-action="Index" asp-route-parentFolderId="@breadcrumb.FolderId">@breadcrumb.FolderName</a>
+
+                                <span> / </span>
+                            }
+                            else
+                            {
+                                <span>@breadcrumb.FolderName / </span>
+                            }
+                        }
+                    }
+                </td>
+            </tr>
+        }
+        @foreach (var file in Model.Files)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("GetFile", new { filePath = file.Server + file.ContainerPath + file.FullFileName })" target="_blank">
+                        <img src="~/images/@(file.FileType.ToLower().TrimStart('.'))-icon.png" alt="@file.FileType Icon" class="icon" />
+                        @file.FileName
+                    </a>
+                </td>
+                <td>@file.ModifiedBy</td>
+                <td>@(file.ModifiedDate.HasValue ? file.ModifiedDate.Value.ToString("dd/MM/yyyy HH:mm") : "")</td>
+                <td>
+                    @if (fileBreadcrumbs.ContainsKey(file.FileId))
+                    {
+                        @foreach (var breadcrumb in fileBreadcrumbs[file.FileId])
+                        {
+                            @if (breadcrumb.FolderId != 0)
+                            {
+                                <a asp-action="Index" asp-route-parentFolderId="@breadcrumb.FolderId">@breadcrumb.FolderName</a>
+
+                                <span> / </span>
+                            }
+                            else
+                            {
+                                <span>@breadcrumb.FolderName / </span>
+                            }
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/folderScripts.js"></script>
+    <script src="~/js/fileScripts.js"></script>
+    <script src="~/js/searchScripts.js"></script>
+}

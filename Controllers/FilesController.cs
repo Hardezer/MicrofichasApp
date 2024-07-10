@@ -141,25 +141,40 @@ namespace Microfichas_App.Controllers
             {
                 _context.Files.Remove(file);
                 await _context.SaveChangesAsync();
+
+                // Redirige al Index con el FolderId correcto si el archivo ha sido eliminado
+                return RedirectToAction("Index", "Folders", new { parentFolderId = file.FolderId });
             }
-            return RedirectToAction("Index", "Folders", new { parentFolderId = file.FolderId });
+            // Si el archivo no se encuentra, redirige al Index
+            return RedirectToAction("Index", "Folders");
         }
 
-        
         [HttpPost]
         public async Task<IActionResult> DeleteFile(int id)
         {
-            var file = await _context.Files.FindAsync(id);
-            if (file == null)
+            try
             {
-                return Json(new { success = false, message = "File not found" });
+                var file = await _context.Files.FindAsync(id);
+                if (file == null)
+                {
+                    return Json(new { success = false, message = "File not found" });
+                }
+
+                _context.Files.Remove(file);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
             }
-
-            _context.Files.Remove(file);
-            await _context.SaveChangesAsync();
-
-            return Json(new { success = true });
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return Json(new { success = false, message = "An error occurred while deleting the file due to concurrency issues. The file may have been modified or deleted by another process." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred while deleting the file: " + ex.Message });
+            }
         }
+
+
 
         private bool FileExists(int id)
         {

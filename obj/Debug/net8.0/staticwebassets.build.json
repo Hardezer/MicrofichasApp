@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FOsNRXFImMt0lHQyNNMcz1hN5Dmfcpj+CjWUoxsqLJw=",
+  "Hash": "4enqoVPc6UzoRsh8c6lPbv3oq/iEEAKpJgCfD+1gNo0=",
   "Source": "Microfichas App",
   "BasePath": "_content/Microfichas App",
   "Mode": "Default",
@@ -74,6 +74,25 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\css\\table-styles.css",
+      "SourceId": "Microfichas App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\",
+      "BasePath": "_content/Microfichas App",
+      "RelativePath": "css/table-styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\table-styles.css"
+    },
+    {
       "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\favicon.ico",
       "SourceId": "Microfichas App",
       "SourceType": "Discovered",
@@ -91,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\flecha-icon.png",
+      "SourceId": "Microfichas App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\",
+      "BasePath": "_content/Microfichas App",
+      "RelativePath": "images/flecha-icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\flecha-icon.png"
     },
     {
       "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\folder-icon.png",
@@ -131,6 +169,25 @@
       "OriginalItemSpec": "wwwroot\\images\\jpg-icon.png"
     },
     {
+      "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\lnk-icon.png",
+      "SourceId": "Microfichas App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\",
+      "BasePath": "_content/Microfichas App",
+      "RelativePath": "images/lnk-icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\lnk-icon.png"
+    },
+    {
       "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\pdf-icon.png",
       "SourceId": "Microfichas App",
       "SourceType": "Discovered",
@@ -169,6 +226,25 @@
       "OriginalItemSpec": "wwwroot\\images\\png-icon.png"
     },
     {
+      "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\search-icon.png",
+      "SourceId": "Microfichas App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\",
+      "BasePath": "_content/Microfichas App",
+      "RelativePath": "images/search-icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\search-icon.png"
+    },
+    {
       "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\folderScripts.js",
       "SourceId": "Microfichas App",
       "SourceType": "Discovered",
@@ -186,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\folderScripts.js"
+    },
+    {
+      "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\searchScripts.js",
+      "SourceId": "Microfichas App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\",
+      "BasePath": "_content/Microfichas App",
+      "RelativePath": "js/searchScripts.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\searchScripts.js"
     },
     {
       "Identity": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\site.js",

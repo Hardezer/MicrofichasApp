@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microfichas_App.Views.Folders
 {
-    public class EditModel : PageModel
+    public class _ModalsModel : PageModel
     {
         public void OnGet()
         {

@@ -3,6 +3,8 @@ using Microfichas_App.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.SignalR;
+using Microfichas_App.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,9 @@ builder.Services.AddScoped<FolderService>();
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug(); // Añadir logging de depuración
+
+// Configuración de SignalR
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -40,5 +45,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Configuración del Hub de SignalR
+app.MapHub<ProgressHub>("/progressHub");
 
 app.Run();

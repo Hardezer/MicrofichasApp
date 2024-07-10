@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\css\\table-styles.css",
+      "PackagePath": "staticwebassets\\css\\table-styles.css"
+    },
+    {
       "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\flecha-icon.png",
+      "PackagePath": "staticwebassets\\images\\flecha-icon.png"
     },
     {
       "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\folder-icon.png",
@@ -21,6 +29,10 @@
       "PackagePath": "staticwebassets\\images\\jpg-icon.png"
     },
     {
+      "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\lnk-icon.png",
+      "PackagePath": "staticwebassets\\images\\lnk-icon.png"
+    },
+    {
       "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\pdf-icon.png",
       "PackagePath": "staticwebassets\\images\\pdf-icon.png"
     },
@@ -29,8 +41,16 @@
       "PackagePath": "staticwebassets\\images\\png-icon.png"
     },
     {
+      "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\images\\search-icon.png",
+      "PackagePath": "staticwebassets\\images\\search-icon.png"
+    },
+    {
       "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\folderScripts.js",
       "PackagePath": "staticwebassets\\js\\folderScripts.js"
+    },
+    {
+      "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\searchScripts.js",
+      "PackagePath": "staticwebassets\\js\\searchScripts.js"
     },
     {
       "Id": "C:\\Users\\ezel_\\source\\repos\\Microfichas App\\Microfichas App\\wwwroot\\js\\site.js",

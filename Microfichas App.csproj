@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Folders\_SearchResults.cshtml" />
+    <Content Remove="wwwroot\js\fileScripts.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Shared\_SearchResults.cshtml" />
+    <None Include="Views\Folders\_SearchResults.cshtml" />
+    <None Include="wwwroot\js\fileScripts.js" />
     <None Include="wwwroot\lib\bootstrap\css\bootstrap-grid.css" />
     <None Include="wwwroot\lib\bootstrap\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\css\bootstrap-grid.min.css" />
@@ -60,6 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
@@ -78,6 +80,8 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Folders\_SearchResults.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\table-styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\fileScripts.js" />
   </ItemGroup>
 
 </Project>

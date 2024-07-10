@@ -12,9 +12,34 @@
     <button type="submit" class="btn btn-primary">Import</button>
 </form>
 
+<div id="progressBar" class="progress" style="margin-top: 20px; display: none;">
+    <div id="progressBarFill" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+</div>
+
 @if (ViewBag.Message != null)
 {
     <div class="alert alert-info">
         @ViewBag.Message
     </div>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.3/signalr.min.js"></script>
+    <script type="text/javascript">
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/progressHub")
+            .build();
+
+        connection.on("ReceiveProgress", function (progress) {
+            document.getElementById("progressBar").style.display = "block";
+            const progressBarFill = document.getElementById("progressBarFill");
+            progressBarFill.style.width = progress + "%";
+            progressBarFill.setAttribute("aria-valuenow", progress);
+            progressBarFill.innerText = progress + "%";
+        });
+
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+    </script>
 }

@@ -1,5 +1,7 @@
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -12,16 +14,6 @@ html {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-    background-color: #f4f6f9;
-}
-
 .navbar-brand, .nav-link {
     color: #007bff !important;
 }
@@ -29,7 +21,18 @@ body {
 .footer {
     background-color: #f8f9fa;
     padding: 1rem 0;
+    border-top: 1px solid #eaeaea;
+    text-align: center;
 }
+
+    .footer a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
 
 .main-content {
     padding: 2rem 0;
@@ -45,11 +48,6 @@ body {
         border-color: #0056b3;
     }
 
-.breadcrumb {
-    background-color: #f8f9fa;
-}
-
-/* Additional styles for better appearance */
 .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -68,49 +66,8 @@ body {
     margin-right: 1rem;
 }
 
-.footer {
-    border-top: 1px solid #eaeaea;
-    text-align: center;
-}
-
-    .footer a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-/* Custom styles for table */
-.table {
-    background-color: #fff;
-    border: 1px solid #eaeaea;
-}
-
-    .table thead {
-        background-color: #343a40;
-        color: #fff;
-    }
-
-    .table tbody tr {
-        transition: background-color 0.2s ease;
-    }
-
-        .table tbody tr:hover {
-            background-color: #f1f3f5;
-        }
-
-    .table tbody td {
-        vertical-align: middle;
-    }
-
 .shadow-sm {
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-    content: ">";
 }
 
 .btn-outline-primary {
@@ -133,9 +90,31 @@ body {
         color: #fff;
     }
 
-/* Custom icon styles */
 .icon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     margin-right: 8px;
+}
+
+.me-2 {
+    margin-right: 0.5rem;
+}
+
+.ms-3 {
+    margin-left: 1rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+h2 {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.modal-content {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }

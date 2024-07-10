@@ -1,0 +1,143 @@
+﻿/* Custom styles for table */
+.table {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    margin-bottom: 1.5rem;
+}
+
+    .table thead {
+        background-color: #f8f9fa;
+        color: #333;
+        font-weight: bold; /* Negrita solo para la cabecera */
+    }
+
+    .table tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+        .table tbody tr:hover {
+            background-color: #f1f3f5;
+        }
+
+    .table tbody td {
+        vertical-align: middle;
+        padding: 0.75rem;
+        font-weight: normal; /* Sin negrita para los nombres de las carpetas */
+    }
+
+th {
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.sort-arrow {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+}
+
+.arrow-up {
+    transform: rotate(180deg);
+}
+
+.arrow-down {
+    transform: rotate(0deg);
+}
+
+/* Truncate text in table cells and add ellipsis */
+.table td, .table th {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+    .table td a, .table th span {
+        display: inline-block;
+        max-width: 400px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+
+.breadcrumb {
+    background-color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .breadcrumb-item a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+.breadcrumb-item.active-breadcrumb a {
+    color: #555;
+    font-weight: normal;
+}
+
+.breadcrumb-item.previous-breadcrumb a {
+    color: #6c757d;
+}
+
+/* Folder and file links */
+.folder-link, .file-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: normal; /* Sin negrita para los nombres de las carpetas */
+}
+
+    .folder-link:hover, .file-link:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+/* General styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.search-box {
+    width: 100%;
+    max-width: 400px;
+}
+
+    .search-box .input-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .search-box .input-group-text {
+        background-color: white;
+        border-right: 0;
+        padding-right: 10px;
+        border: none;
+        margin-right: 5px;
+    }
+
+    .search-box .form-control {
+        border-left: 0;
+        border-radius: 0.25rem;
+        border: 1px solid #ccc;
+    }
+
