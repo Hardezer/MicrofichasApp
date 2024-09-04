@@ -30,6 +30,12 @@ namespace Microfichas_App.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FileId"));
 
+                    b.Property<string>("AzureDocumentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AzureToken")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ContainerPath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

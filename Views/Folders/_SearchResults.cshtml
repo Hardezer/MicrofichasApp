@@ -28,17 +28,17 @@
                 <td>
                     @if (folderBreadcrumbs.ContainsKey(folder.FolderId))
                     {
-                        @foreach (var breadcrumb in folderBreadcrumbs[folder.FolderId])
+                        var crumbs = folderBreadcrumbs[folder.FolderId];
+                        if (crumbs.Count > 2)
                         {
-                            @if (breadcrumb.FolderId != 0)
+                            <span>... / </span>
+                        }
+                        @foreach (var breadcrumb in crumbs.Skip(crumbs.Count - 2))
+                        {
+                            <a asp-action="Index" asp-route-parentFolderId="@breadcrumb.FolderId">@breadcrumb.FolderName</a>
+                            if (breadcrumb != crumbs.Last())
                             {
-                                <a asp-action="Index" asp-route-parentFolderId="@breadcrumb.FolderId">@breadcrumb.FolderName</a>
-
                                 <span> / </span>
-                            }
-                            else
-                            {
-                                <span>@breadcrumb.FolderName / </span>
                             }
                         }
                     }
@@ -49,7 +49,7 @@
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("GetFile", new { filePath = file.Server + file.ContainerPath + file.FullFileName })" target="_blank">
+                    <a onclick="openFileModal('@file.FileId', '@file.FileName', '@Url.Action("GetFile", new { filePath = file.Server + file.ContainerPath + file.FullFileName })')" class="cursor-pointer">
                         <img src="~/images/@(file.FileType.ToLower().TrimStart('.'))-icon.png" alt="@file.FileType Icon" class="icon" />
                         @file.FileName
                     </a>
@@ -59,23 +59,24 @@
                 <td>
                     @if (fileBreadcrumbs.ContainsKey(file.FileId))
                     {
-                        @foreach (var breadcrumb in fileBreadcrumbs[file.FileId])
+                        var crumbs = fileBreadcrumbs[file.FileId];
+                        if (crumbs.Count > 2)
                         {
-                            @if (breadcrumb.FolderId != 0)
+                            <span>... / </span>
+                        }
+                        @foreach (var breadcrumb in crumbs.Skip(crumbs.Count - 2))
+                        {
+                            <a asp-action="Index" asp-route-parentFolderId="@breadcrumb.FolderId">@breadcrumb.FolderName</a>
+                            if (breadcrumb != crumbs.Last())
                             {
-                                <a asp-action="Index" asp-route-parentFolderId="@breadcrumb.FolderId">@breadcrumb.FolderName</a>
-
                                 <span> / </span>
-                            }
-                            else
-                            {
-                                <span>@breadcrumb.FolderName / </span>
                             }
                         }
                     }
                 </td>
             </tr>
         }
+
     </tbody>
 </table>
 

@@ -48,8 +48,10 @@ html {
         border-color: #0056b3;
     }
 
+/* Specific adjustments for elements not overridden by table-styles.css */
+
 .navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
@@ -67,7 +69,7 @@ html {
 }
 
 .shadow-sm {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    box-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.05) !important;
 }
 
 .btn-outline-primary {
@@ -116,5 +118,18 @@ h2 {
 
 .modal-content {
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
+
+
+.icon-button {
+    border: none;
+    background: transparent;
+    padding: 5px;
+    cursor: pointer;
+}
+
+    .icon-button img {
+        width: 20px; /* Ajusta el tamaño según necesites */
+        height: auto;
+    }

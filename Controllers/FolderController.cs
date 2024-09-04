@@ -1,18 +1,34 @@
 ﻿using Microfichas_App.Data;
+using Microfichas_App.Hubs;
 using Microfichas_App.Models;
+using Microfichas_App.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 namespace Microfichas_App.Controllers
 {
     public class FoldersController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<FoldersController> _logger;
+        private readonly FolderService _folderService;
+        private readonly IHubContext<ProgressHub> _hubContext;
+        private readonly IFileService _fileService;
+        private readonly IAzureService _azureService;
 
-        public FoldersController(ApplicationDbContext context, ILogger<FoldersController> logger)
+        public FoldersController(ApplicationDbContext context, ILogger<FoldersController> logger, FolderService folderService, IHubContext<ProgressHub> hubContext, IFileService fileService, IAzureService azureService)
         {
             _context = context;
             _logger = logger;
+            _folderService = folderService;
+            _hubContext = hubContext;
+            _fileService = fileService;
+            _azureService = azureService;
         }
 
         public async Task<IActionResult> Index(int? parentFolderId, string errorMessage = null)
@@ -52,6 +68,81 @@ namespace Microfichas_App.Controllers
 
             return View(viewModel);
         }
+
+        public async Task<IActionResult> Publish(int id)
+        {
+            var file = await _fileService.GetFileByIdAsync(id);
+            if (file == null)
+            {
+                return NotFound();
+            }
+
+            // Obtener el token de Azure
+            JObject tokenResponse = await _azureService.GetTokenAsync("microfichas@vitacura.cl");
+            if (tokenResponse == null || (bool)tokenResponse["tipo"])
+            {
+                TempData["ErrorMessage"] = "Error al obtener el token de acceso.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var token = (string)tokenResponse["datos"]["token"];
+            _logger.LogInformation($"Token: {token}");
+
+            // Leer el contenido del archivo desde el path
+            string filePath = Path.Combine(file.Server, file.ContainerPath, file.FullFileName);
+            byte[] fileContent = await System.IO.File.ReadAllBytesAsync(filePath);
+            var fileContentBase64 = Convert.ToBase64String(fileContent);
+            _logger.LogInformation(fileContentBase64);
+
+            // Publicar el documento en Azure
+            JObject publishResponse;
+            try
+            {
+                publishResponse = await _azureService.PublishDocumentAsync(token, file.FileName, 2730, fileContentBase64);
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"Error during PublishDocumentAsync: {ex.Message}");
+                TempData["ErrorMessage"] = "Error al publicar el documento: " + ex.Message;
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (publishResponse == null || (bool)publishResponse["tipo"])
+            {
+                TempData["ErrorMessage"] = "Error al publicar el documento.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var documentId = (string)publishResponse["datos"]["id"];
+            var documentUrl = (string)publishResponse["datos"]["url"];
+            _logger.LogInformation($"Document ID: {documentId}");
+            _logger.LogInformation($"Document URL: {documentUrl}");
+
+            // Parse the document URL to update the Server, ContainerPath, and FullFileName properties
+            Uri uri = new Uri(documentUrl);
+            string server = $"{uri.Scheme}://{uri.Host}";
+            string containerPath = uri.AbsolutePath.Substring(1, uri.AbsolutePath.LastIndexOf('/') - 1);
+            string fullFileName = uri.AbsolutePath.Substring(uri.AbsolutePath.LastIndexOf('/') + 1);
+
+            _logger.LogInformation($"Parsed Server: {server}");
+            _logger.LogInformation($"Parsed ContainerPath: {containerPath}");
+            _logger.LogInformation($"Parsed FullFileName: {fullFileName}");
+
+            // Actualizar la base de datos con el ID del documento y la respuesta completa del servidor
+            file.AzureDocumentId = documentId;
+            file.AzureToken = publishResponse.ToString();
+            file.Server = server;
+            file.ContainerPath = containerPath;
+            file.FullFileName = fullFileName;
+
+            _logger.LogInformation($"Before Update: AzureDocumentId = {file.AzureDocumentId}, AzureToken = {file.AzureToken}, Server = {file.Server}, ContainerPath = {file.ContainerPath}, FullFileName = {file.FullFileName}");
+
+            await _fileService.UpdateFileAsync(file);
+
+            TempData["Message"] = "Documento publicado exitosamente.";
+            return RedirectToAction(nameof(Index));
+        }
+
 
 
         [HttpGet]
@@ -136,34 +227,6 @@ namespace Microfichas_App.Controllers
             return View(folder);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var folder = await _context.Folders.FindAsync(id);
-            int? parentFolderId = folder?.ParentFolderId;
-
-            if (folder != null)
-            {
-                using (var transaction = await _context.Database.BeginTransactionAsync())
-                {
-                    try
-                    {
-                        await DeleteFolderRecursivelyAsync(id);
-                        await transaction.CommitAsync();
-                    }
-                    catch (DbUpdateConcurrencyException ex)
-                    {
-                        await transaction.RollbackAsync();
-                        ViewData["ErrorMessage"] = "La carpeta no pudo ser eliminada. Inténtalo de nuevo. " + ex.Message;
-                        return RedirectToAction(nameof(Index), new { parentFolderId = parentFolderId });
-                    }
-                }
-            }
-
-            return RedirectToAction(nameof(Index), new { parentFolderId = parentFolderId });
-        }
-
 
         [HttpPost]
         public async Task<IActionResult> DeleteFolder(int id)
@@ -174,49 +237,49 @@ namespace Microfichas_App.Controllers
                 return Json(new { success = false, message = "Carpeta no encontrada." });
             }
 
-            // Si la carpeta tiene archivos o subcarpetas, elimínelos también
+            var totalItems = 1; // La carpeta raíz cuenta como un ítem.
+            var processedItems = 0;
+
             var files = await _context.Files.Where(f => f.FolderId == id).ToListAsync();
-            _context.Files.RemoveRange(files);
+            totalItems += files.Count;
 
             var subfolders = await _context.Folders.Where(f => f.ParentFolderId == id).ToListAsync();
+            await _hubContext.Clients.All.SendAsync("ReceiveProgress", 1);
+            foreach (var subfolder in subfolders)
+            {
+                var subfolderFiles = await _context.Files.Where(f => f.FolderId == subfolder.FolderId).ToListAsync();
+                totalItems += subfolderFiles.Count;
+            }
+            totalItems += subfolders.Count;
+            await _hubContext.Clients.All.SendAsync("ReceiveProgress", 2);
+            // Eliminación de archivos directos
+            _context.Files.RemoveRange(files);
+            processedItems += files.Count;
+            await _hubContext.Clients.All.SendAsync("ReceiveProgress", processedItems * 100 / totalItems);
+            await _context.SaveChangesAsync();
+
+            // Eliminación de subcarpetas y sus archivos
             foreach (var subfolder in subfolders)
             {
                 var subfolderFiles = await _context.Files.Where(f => f.FolderId == subfolder.FolderId).ToListAsync();
                 _context.Files.RemoveRange(subfolderFiles);
+                processedItems += subfolderFiles.Count;
+                await _hubContext.Clients.All.SendAsync("ReceiveProgress", processedItems * 100 / totalItems);
+
                 _context.Folders.Remove(subfolder);
+                processedItems++;
+                await _hubContext.Clients.All.SendAsync("ReceiveProgress", processedItems * 100 / totalItems);
+                await _context.SaveChangesAsync();
             }
 
+            // Eliminación de la carpeta raíz
             _context.Folders.Remove(folder);
+            processedItems++;
+            await _hubContext.Clients.All.SendAsync("ReceiveProgress", processedItems * 100 / totalItems);
             await _context.SaveChangesAsync();
 
             return Json(new { success = true });
         }
-        private async Task DeleteFolderRecursivelyAsync(int folderId)
-        {
-            // Obtener y eliminar archivos dentro de la carpeta
-            var files = await _context.Files.Where(f => f.FolderId == folderId).ToListAsync();
-            _context.Files.RemoveRange(files);
-            await _context.SaveChangesAsync();
-
-            // Obtener subcarpetas dentro de la carpeta
-            var subfolders = await _context.Folders.Where(f => f.ParentFolderId == folderId).ToListAsync();
-
-            // Eliminar cada subcarpeta recursivamente
-            foreach (var subfolder in subfolders)
-            {
-                await DeleteFolderRecursivelyAsync(subfolder.FolderId);
-            }
-
-            // Eliminar la carpeta principal
-            var folder = await _context.Folders.FindAsync(folderId);
-            if (folder != null)
-            {
-                _context.Folders.Remove(folder);
-                await _context.SaveChangesAsync();
-            }
-        }
-
-
 
         private bool FolderExists(int id)
         {
@@ -271,19 +334,9 @@ namespace Microfichas_App.Controllers
             return breadcrumbs;
         }
 
-
         private async Task<List<Breadcrumb>> BuildBreadcrumbs(int folderId)
         {
-            var breadcrumbs = new List<Breadcrumb>();
-            breadcrumbs.Add(new Breadcrumb { FolderId = 0, FolderName = "Inicio" }); // Añadir el primer breadcrumb "Inicio"
-            while (folderId != 0)
-            {
-                var folder = await _context.Folders.FindAsync(folderId);
-                if (folder == null) break;
-                breadcrumbs.Insert(1, new Breadcrumb { FolderId = folder.FolderId, FolderName = folder.FolderName }); // Insertar después de "Inicio"
-                folderId = folder.ParentFolderId ?? 0;
-            }
-            return breadcrumbs;
+            return await _folderService.BuildBreadcrumbs(folderId);
         }
 
     }

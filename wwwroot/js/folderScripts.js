@@ -70,7 +70,22 @@
         modal.find('#deleteFolderName').text(folderName);
     });
 
-    // Manejar evento cuando se confirma la eliminación de carpeta
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/progressHub")
+        .build();
+
+    connection.on("ReceiveProgress", function (progress) {
+        document.getElementById("progressBar").style.display = "block";
+        const progressBarFill = document.getElementById("progressBarFill");
+        progressBarFill.style.width = progress + "%";
+        progressBarFill.setAttribute("aria-valuenow", progress);
+        progressBarFill.innerText = progress + "%";
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
     $('#confirmDeleteFolder').click(function () {
         var folderId = $('#deleteFolderId').val();
 
@@ -78,6 +93,10 @@
             url: '/Folders/DeleteFolder',
             type: 'POST',
             data: { id: folderId },
+            beforeSend: function () {
+                $('#progressBar').show();
+                $('#progressBarFill').css('width', '0%').attr('aria-valuenow', 0).text('0%');
+            },
             success: function (response) {
                 if (response.success) {
                     location.reload();

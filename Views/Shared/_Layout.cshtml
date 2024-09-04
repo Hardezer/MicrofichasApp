@@ -11,22 +11,17 @@
 <body>
     <div class="container">
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white rounded">
+                <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MicrofichasApp</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mr-auto">
-                            
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Folders" asp-action="Index">Folders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Import" asp-action="Index">Import</a>
-                            </li>
-                        </ul>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-item nav-link active" asp-area="" asp-controller="Folders" asp-action="Index">Folders</a>
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Import" asp-action="Index">Import</a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -34,14 +29,15 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        <footer class="border-top footer text-muted">
-            <div class="container">
+        <footer class="footer mt-auto py-3 bg-light rounded">
+            <div class="container text-center">
                 &copy; 2024 - MicrofichasApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>
     </div>
 
     <!-- Cargar jQuery primero -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.3/signalr.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>

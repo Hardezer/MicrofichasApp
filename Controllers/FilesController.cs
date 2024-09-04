@@ -6,6 +6,7 @@ using AppFile = Microfichas_App.Models.File;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microfichas_App.Services;
 
 namespace Microfichas_App.Controllers
 {
@@ -13,11 +14,15 @@ namespace Microfichas_App.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<FilesController> _logger;
+        private readonly IFileService _fileService;
+        private readonly IAzureService _azureService;
 
-        public FilesController(ApplicationDbContext context, ILogger<FilesController> logger)
+        public FilesController(ApplicationDbContext context, ILogger<FilesController> logger, IFileService fileService, IAzureService azureService )
         {
             _context = context;
             _logger = logger;
+            _fileService = fileService;
+            _azureService = azureService;  
         }
 
         public async Task<IActionResult> Index(int? parentFolderId)
@@ -28,6 +33,7 @@ namespace Microfichas_App.Controllers
 
             return View(files);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

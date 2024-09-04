@@ -138,3 +138,14 @@ C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\obj\Debug\net8.0\Mic
 C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\obj\Debug\net8.0\ref\Microfichas App.dll
 C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\ezel_\source\repos\Microfichas App\Microfichas App\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

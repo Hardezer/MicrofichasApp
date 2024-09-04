@@ -81,5 +81,20 @@ namespace Microfichas_App.Services
 
             return processedItems;
         }
+
+
+        public async Task<List<Breadcrumb>> BuildBreadcrumbs(int folderId)
+        {
+            var breadcrumbs = new List<Breadcrumb>();
+            breadcrumbs.Add(new Breadcrumb { FolderId = 0, FolderName = "Inicio" });
+            while (folderId != 0)
+            {
+                var folder = await _context.Folders.FindAsync(folderId);
+                if (folder == null) break;
+                breadcrumbs.Insert(1, new Breadcrumb { FolderId = folder.FolderId, FolderName = folder.FolderName });
+                folderId = folder.ParentFolderId ?? 0;
+            }
+            return breadcrumbs;
+        }
     }
 }

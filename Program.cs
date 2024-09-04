@@ -15,7 +15,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Registrar servicios personalizados
 builder.Services.AddScoped<FolderService>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IAzureService, AzureService>();
 
 // Configuración del servicio de logging
 builder.Logging.ClearProviders();

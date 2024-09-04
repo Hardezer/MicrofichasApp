@@ -67,6 +67,9 @@
                 <p>¿Está seguro que desea eliminar esta carpeta?</p>
                 <input type="hidden" id="deleteFolderId" />
                 <p id="deleteFolderName" class="font-weight-bold"></p>
+                <div id="progressBar" class="progress" style="margin-top: 20px; display: none;">
+                    <div id="progressBarFill" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Eliminando.. 0%</div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -124,3 +127,5 @@
         </div>
     </div>
 </div>
+
+
